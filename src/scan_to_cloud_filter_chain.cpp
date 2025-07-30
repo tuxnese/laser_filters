@@ -131,7 +131,7 @@ ScanToCloudFilterChain::scanCallback(
   scan_filter_chain_.update(*scan_msg, filtered_scan);
 
   // Adjust timestamp to the beginning of the scan to avoid TF extrapolation errors
-  filtered_scan.header.stamp = filtered_scan.header.stamp - rclcpp::Duration::from_seconds(filtered_scan.scan_time);
+  filtered_scan.header.stamp = rclcpp::Time(filtered_scan.header.stamp) - rclcpp::Duration::from_seconds(filtered_scan.scan_time);
 
   // Project laser into point cloud
   sensor_msgs::msg::PointCloud2 scan_cloud;
